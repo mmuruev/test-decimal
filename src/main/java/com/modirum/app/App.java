@@ -10,6 +10,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  * Hello world!
@@ -41,6 +42,7 @@ public class App {
      */
     public static final String FILE_NAME = "big_random_numbers.txt";
 
+
     public static void main(String[] args) {
         App app = new App();
         System.out.println("Start file generation...");
@@ -52,6 +54,34 @@ public class App {
             System.err.println("Impossible generate number file");
             e.printStackTrace();
         }
+
+        System.out.println("Start read file...");
+        List<BigDecimal> fileContent;
+        try {
+            fileContent = app.readFile(FILE_NAME);
+            System.out.println("File has been readed");
+        } catch (IOException e) {
+            System.err.println("Impossible read number file");
+            //e.printStackTrace();
+        }
+    }
+
+    /**
+     *  Read file into collection
+     * @param fileName - file name
+     * @return - file content each element one line
+     * @throws IOException
+     */
+    public List<BigDecimal> readFile(String fileName) throws IOException {
+        Path path = Paths.get(fileName);
+        List<BigDecimal> fileContent = new ArrayList<>(RANDOM_ELEMENTS_AMOUNT);
+        try (Scanner scanner = new Scanner(path, StandardCharsets.UTF_8.name())) {
+            while (scanner.hasNextLine()) {
+                //process each line in some way
+                fileContent.add(new BigDecimal(scanner.nextLine())); //nextLine();
+            }
+        }
+        return fileContent;
     }
 
     /**
