@@ -1,3 +1,3 @@
 #!/bin/bash
 
-mvn exec:java -Dexec.mainClass="com.company.app.App"
+mvn exec:java -Dexec.mainClass="com.modirum.app.App"

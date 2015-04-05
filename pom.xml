@@ -68,11 +68,11 @@
 
                     <arguments>
                         <!--                        <argument>-Dmyproperty=myvalue</argument>-->
-                        <argument>-classpath</argument>
+                       <!-- <argument>-classpath</argument>-->
                         <!-- automatically creates the classpath using all project dependencies,
                              also adding the project build directory -->
                         <classpath/>
-                        <argument>com.modirum.app.App</argument>
+                        <!--<argument>com.modirum.app.App</argument>-->
                     </arguments>
                     <!-- optional -->
                     <!--            <workingDirectory>/tmp</workingDirectory>

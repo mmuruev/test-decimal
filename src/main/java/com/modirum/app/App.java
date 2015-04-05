@@ -44,13 +44,17 @@ public class App {
      */
     public static final String FILE_NAME = "big_random_numbers.txt";
 
+    private static Long startTimeMill = 0L;
+
 
     public static void main(String[] args) {
         App app = new App();
         System.out.println("Start file generation...");
 
         try {
+            startMeasure();
             app.generateFile(FILE_NAME);
+            stopMeasure();
             System.out.println("File has been successfully created");
         } catch (IOException e) {
             System.err.println("Impossible generate number file");
@@ -60,18 +64,28 @@ public class App {
         System.out.println("Start read file...");
         List<BigDecimal> fileContent;
         try {
+            startMeasure();
             fileContent = app.readFile(FILE_NAME);
+            stopMeasure();
             System.out.println("File has been readed");
         } catch (IOException e) {
             System.err.println("Impossible read number file");
             return;
             //e.printStackTrace();
         }
+
+        System.out.println("Sorting...");
+        startMeasure();
         EvenNotEven container = app.sortByEven(fileContent);
         container.sortAll();
+        stopMeasure();
 
+        startMeasure();
         System.out.println(String.format(" Even sum: %s", container.getEvenSum()));
+        stopMeasure();
+        startMeasure();
         System.out.println(String.format(" Uneven sum: %s", container.getUnevenSum()));
+        stopMeasure();
     }
 
     /**
@@ -148,7 +162,7 @@ public class App {
      * @param max - maximum value
      * @return - random value
      */
-    public static BigDecimal generateRandomValue(BigDecimal min, BigDecimal max) {
+    public BigDecimal generateRandomValue(BigDecimal min, BigDecimal max) {
         return generateRandomValue(min, max, SCALE_BIG_DECIMAL);
     }
 
@@ -160,9 +174,18 @@ public class App {
      * @param scale - scale value
      * @return - random value
      */
-    public static BigDecimal generateRandomValue(BigDecimal min, BigDecimal max, int scale) {
+    public BigDecimal generateRandomValue(BigDecimal min, BigDecimal max, int scale) {
         Random randomGenerator = new Random();
         BigDecimal randomBigDecimal = min.add(new BigDecimal(randomGenerator.nextDouble()).multiply(max.subtract(min)));
         return randomBigDecimal.setScale(scale, BigDecimal.ROUND_HALF_UP);
     }
+
+    public static void startMeasure() {
+        startTimeMill = System.currentTimeMillis();
+    }
+
+    public static void stopMeasure() {
+        System.out.println(String.format("Spend millis: %d", System.currentTimeMillis() - startTimeMill));
+    }
+
 }
