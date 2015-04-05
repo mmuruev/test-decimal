@@ -15,7 +15,7 @@ public class EvenNotEven {
 
     private List<BigDecimal> even = new LinkedList<>();
 
-    private List<BigDecimal> notEven = new LinkedList<>();
+    private List<BigDecimal> uneven = new LinkedList<>();
 
     public List<BigDecimal> getEven() {
         return even;
@@ -25,19 +25,35 @@ public class EvenNotEven {
         this.even.add(even);
     }
 
-    public List<BigDecimal> getNotEven() {
-        return notEven;
+    public List<BigDecimal> getUneven() {
+        return uneven;
     }
 
-    public void setNotEven(BigDecimal notEven) {
-        this.notEven.add(notEven);
+    public void setUneven(BigDecimal uneven) {
+        this.uneven.add(uneven);
     }
 
     /**
-     *  Sort all collections
+     * Sort all collections
      */
-    public void sortAll(){
+    public void sortAll() {
         Collections.sort(even);
-        Collections.sort(notEven);
+        Collections.sort(uneven);
+    }
+
+    public BigDecimal getEvenSum() {
+        return getSum(even);
+    }
+
+    public BigDecimal getUnevenSum() {
+        return getSum(uneven);
+    }
+
+    private BigDecimal getSum(List<BigDecimal> values) {
+        BigDecimal sum = BigDecimal.ZERO;
+        for (BigDecimal value : values) {
+            sum = sum.add(value);
+        }
+        return sum;
     }
 }

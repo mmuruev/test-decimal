@@ -69,6 +69,9 @@ public class App {
         }
         EvenNotEven container = app.sortByEven(fileContent);
         container.sortAll();
+
+        System.out.println(String.format(" Even sum: %s", container.getEvenSum()));
+        System.out.println(String.format(" Uneven sum: %s", container.getUnevenSum()));
     }
 
     /**
@@ -83,7 +86,7 @@ public class App {
             if (value.toBigInteger().longValue() % 2 == 0) {
                 container.setEven(value);
             } else {
-                container.setNotEven(value);
+                container.setUneven(value);
             }
         }
         return container;
