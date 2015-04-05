@@ -68,6 +68,7 @@ public class App {
             //e.printStackTrace();
         }
         EvenNotEven container = app.sortByEven(fileContent);
+        container.sortAll();
     }
 
     /**

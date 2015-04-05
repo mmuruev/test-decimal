@@ -1,6 +1,7 @@
 package com.modirum.app.container;
 
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -30,5 +31,13 @@ public class EvenNotEven {
 
     public void setNotEven(BigDecimal notEven) {
         this.notEven.add(notEven);
+    }
+
+    /**
+     *  Sort all collections
+     */
+    public void sortAll(){
+        Collections.sort(even);
+        Collections.sort(notEven);
     }
 }
