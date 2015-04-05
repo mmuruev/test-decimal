@@ -1,5 +1,7 @@
 package com.modirum.app;
 
+import com.modirum.app.container.EvenNotEven;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -62,12 +64,33 @@ public class App {
             System.out.println("File has been readed");
         } catch (IOException e) {
             System.err.println("Impossible read number file");
+            return;
             //e.printStackTrace();
         }
+        EvenNotEven container = app.sortByEven(fileContent);
     }
 
     /**
-     *  Read file into collection
+     * Sorting by even or not even values on two collections
+     *
+     * @param values - input raw unsorted collection
+     * @return - container with sorted values
+     */
+    public EvenNotEven sortByEven(List<BigDecimal> values) {
+        EvenNotEven container = new EvenNotEven();
+        for (BigDecimal value : values) {
+            if (value.toBigInteger().longValue() % 2 == 0) {
+                container.setEven(value);
+            } else {
+                container.setNotEven(value);
+            }
+        }
+        return container;
+    }
+
+    /**
+     * Read file into collection
+     *
      * @param fileName - file name
      * @return - file content each element one line
      * @throws IOException
